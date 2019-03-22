@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF7942432243D62100ED64CB /* SwizzleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7942412243D62100ED64CB /* SwizzleHelper.m */; };
 		CF90198B2243C4BC0016912D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CF90198A2243C4BC0016912D /* AppDelegate.m */; };
 		CF90198E2243C4BC0016912D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF90198D2243C4BC0016912D /* ViewController.m */; };
 		CF9019912243C4BC0016912D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF90198F2243C4BC0016912D /* Main.storyboard */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CF7942412243D62100ED64CB /* SwizzleHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwizzleHelper.m; sourceTree = "<group>"; };
+		CF7942422243D62100ED64CB /* SwizzleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwizzleHelper.h; sourceTree = "<group>"; };
 		CF9019862243C4BC0016912D /* AutolayoutDebugging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutolayoutDebugging.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF9019892243C4BC0016912D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CF90198A2243C4BC0016912D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -51,6 +54,7 @@
 		CF9019A92243C4BD0016912D /* AutolayoutDebuggingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AutolayoutDebuggingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF9019AD2243C4BD0016912D /* AutolayoutDebuggingUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutolayoutDebuggingUITests.m; sourceTree = "<group>"; };
 		CF9019AF2243C4BD0016912D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CF9019BB2243C4CA0016912D /* UIView+Debugging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Debugging.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,11 +107,14 @@
 			children = (
 				CF9019892243C4BC0016912D /* AppDelegate.h */,
 				CF90198A2243C4BC0016912D /* AppDelegate.m */,
+				CF9019BB2243C4CA0016912D /* UIView+Debugging.h */,
 				CF90198C2243C4BC0016912D /* ViewController.h */,
 				CF90198D2243C4BC0016912D /* ViewController.m */,
 				CF90198F2243C4BC0016912D /* Main.storyboard */,
 				CF9019922243C4BD0016912D /* Assets.xcassets */,
 				CF9019942243C4BD0016912D /* LaunchScreen.storyboard */,
+				CF7942422243D62100ED64CB /* SwizzleHelper.h */,
+				CF7942412243D62100ED64CB /* SwizzleHelper.m */,
 				CF9019972243C4BD0016912D /* Info.plist */,
 				CF9019982243C4BD0016912D /* main.m */,
 			);
@@ -264,6 +271,7 @@
 			files = (
 				CF90198E2243C4BC0016912D /* ViewController.m in Sources */,
 				CF9019992243C4BD0016912D /* main.m in Sources */,
+				CF7942432243D62100ED64CB /* SwizzleHelper.m in Sources */,
 				CF90198B2243C4BC0016912D /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,7 +8,170 @@
 
 #import "ViewController.h"
 
+#import "UIView+Debugging.h"
+#import "SwizzleHelper.h"
+
 @interface ViewController ()
+
+@property (weak, nonatomic) UILabel *label;
+
+@end
+
+@interface MyView : UILabel
+
+@property (strong) NSMutableArray *bts;
+
+@end
+
+@implementation MyView
+
+//- (NSString *)text
+//{
+//    if (!_bts) _bts = [[NSMutableArray alloc] init];
+//
+//    NSLog(@"%@", [NSThread callStackSymbols]);
+//
+////    [_bts addObject:[NSThread callStackSymbols]];
+//
+//    return @"DEBUG!!!!!!";
+//}
+//
+//- (void)setText:(NSString *)text
+//{
+//    [super setText:@"xxxxxxxx!!!!"];
+//}
+
+//
+//- (NSString *)_layoutDebuggingTitle
+//{
+//    return @"DEBUG!";
+//}
+
+//- (NSString *)description
+//{
+//    return @"DEBUGDESCRIPTION!!!!";
+//}hopp
+
+@end
+
+@interface UILabel_swizzled : NSObject
+@end
+
+@implementation UILabel_swizzled
+
+- (NSString *)swizzled_text {
+    return [NSString stringWithFormat:@"!%@!", [self swizzled_text]];
+}
+
+@end
+
+//@interface DebugHierarchyTargetHub_swizzled : NSObject
+//@end
+//
+//@implementation DebugHierarchyTargetHub_swizzled
+//
+//- (void)swizzled_performRequest:(id)request error:(NSError **)error {
+//    NSLog(@"request: %@", request);
+//    [self swizzled_performRequest:request error:error];
+//}
+//
+//@end
+
+@interface DebugHierarchyTargetHub_swizzled : NSObject
+@end
+
+@implementation DebugHierarchyTargetHub_swizzled
+
+- (id)swizzled_performRequest:(id)arg1 error:(id *)arg2
+{
+    NSLog(@"%@", arg1);
+    id response = [self swizzled_performRequest:arg1 error:arg2];
+//    NSLog(@"%@", response);
+    return response;
+}
+
+//- (id)swizzled_performRequestWithRequestInBase64:(id)base64
+//{
+////    NSLog(@"base64: %@", base64);
+//
+//    NSData *data = [[NSData alloc] initWithBase64EncodedString:base64 options:0];
+//    NSString *json = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//
+//    NSLog(@"request: %@", json);
+//
+//    id result = [self swizzled_performRequestWithRequestInBase64:base64];
+//
+//    NSLog(@"response: %@", result);
+//
+//    return result;
+//}
+
+@end
+
+//
+//DebugHierarchyTargetHub performRequest:error:
+
+@interface DebugHierarchyPropertyAction_swizzled : NSObject
+@end
+
+@implementation DebugHierarchyPropertyAction_swizzled
+
+- (void)swizzled__fetchValuesForPropertiesWithNames:(id)arg1 onObject:(id)arg2 inContext:(id)arg3
+{
+//    NSLog(@"%@, %@, %@", arg1, arg2, arg3);
+    [self swizzled__fetchValuesForPropertiesWithNames:arg1 onObject:arg2 inContext:arg3];
+}
+
+@end
+
+@interface DebugHierarchyRequestExecutionContext_swizzled : NSObject
+@end
+
+@implementation DebugHierarchyRequestExecutionContext_swizzled
+
+- (void)swizzled_addProperties:(NSArray *)properties toObject:(id)arg2 {
+//    if ([arg2 isKindOfClass:[UILabel class]]) {
+//        NSLog(@"properites: %@", properties);
+//        NSLog(@"%@", [properties.firstObject class]);
+//    }
+    if (properties.count == 1) {
+        NSMutableDictionary *dict = [properties.firstObject mutableCopy];
+        if ([dict[@"propertyName"] isEqualToString:@"dbgFormattedDisplayName"]) {
+            dict[@"propertyValue"] = @"XXXXXXXXXXXXXXXXX";
+        }
+        properties = @[ dict ];
+        
+        NSLog(@"%@", [NSThread callStackSymbols]);
+    }
+    [self swizzled_addProperties:properties toObject:arg2];
+}
+
+@end
+
+@interface CALayer_swizzled : NSObject
+@end
+
+@implementation CALayer_swizzled
+
+- (NSString *)swizzled_debugDescription
+{
+    NSString *result = [self swizzled_debugDescription];
+    NSLog(@"swizzled_debugDescription: %@", result);
+    return result;
+}
+
+@end
+
+@interface UILabel (DebuggingDescription)
+@end
+
+@implementation UILabel (DebuggingDescription)
+
++ (id)debugHierarchyValueForPropertyWithName:(id)arg1 onObject:(id)arg2 outOptions:(id *)arg3 outError:(id *)arg4
+{
+    NSLog(@"debugHierarchyValueForPropertyWithName %@, %@", arg1, arg2);
+    return nil;
+}
 
 @end
 
@@ -16,8 +179,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+//    [SwizzleHelper swizzle:[UILabel_swizzled class]];
+//    [SwizzleHelper swizzle:[DebugHierarchyTargetHub_swizzled class]];
+//    [SwizzleHelper swizzle:[DebugHierarchyPropertyAction_swizzled class]];
+//    [SwizzleHelper swizzle:[DebugHierarchyRequestExecutionContext_swizzled class]];
+//    [SwizzleHelper swizzle:[CALayer_swizzled class]];
+    
+    UILabel *label = [[UILabel alloc] init];
+    label.text = @"xxxxxxxx";
+    [label _setDrawsDebugBaselines:YES];
+    
+    [self.view addSubview:(id)label];
+    
+    MyView *view = [[MyView alloc] init];
+    view.text = @"this is suppsed to be some text";
+    [self.view addSubview:view];
+    _label = view;
+    
+    NSLog(@"%@", view.text);
+    
+    [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        if ([view.bts count]) {
+            NSLog(@"%@", view.bts);
+            view.bts = [[NSMutableArray alloc] init];
+        }
+    }];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
 
 @end
