@@ -14,6 +14,7 @@
 @interface ViewController ()
 
 @property (weak, nonatomic) UILabel *label;
+@property (weak, nonatomic) IBOutlet UISwitch *aSwitch;
 
 @end
 
@@ -60,7 +61,7 @@
 @implementation UILabel_swizzled
 
 - (NSString *)swizzled_text {
-    return [NSString stringWithFormat:@"!%@!", [self swizzled_text]];
+  return [NSString stringWithFormat:@"!%@!", [self swizzled_text]];
 }
 
 @end
@@ -84,10 +85,10 @@
 
 - (id)swizzled_performRequest:(id)arg1 error:(id *)arg2
 {
-    NSLog(@"%@", arg1);
-    id response = [self swizzled_performRequest:arg1 error:arg2];
-//    NSLog(@"%@", response);
-    return response;
+  NSLog(@"%@", arg1);
+  id response = [self swizzled_performRequest:arg1 error:arg2];
+  //    NSLog(@"%@", response);
+  return response;
 }
 
 //- (id)swizzled_performRequestWithRequestInBase64:(id)base64
@@ -118,8 +119,17 @@
 
 - (void)swizzled__fetchValuesForPropertiesWithNames:(id)arg1 onObject:(id)arg2 inContext:(id)arg3
 {
-//    NSLog(@"%@, %@, %@", arg1, arg2, arg3);
-    [self swizzled__fetchValuesForPropertiesWithNames:arg1 onObject:arg2 inContext:arg3];
+  //    NSLog(@"%@, %@, %@", arg1, arg2, arg3);
+  [self swizzled__fetchValuesForPropertiesWithNames:arg1 onObject:arg2 inContext:arg3];
+}
+
+- (void)swizzled_setPropertyNames:(NSArray *)arg1
+{
+  NSLog(@"propertyNames: %@", arg1);
+  if ([arg1 isEqualToArray:@[ @"dbgFormattedDisplayName" ]]) {
+    NSLog(@"%@", [NSThread callStackSymbols]);
+  }
+  [self swizzled_setPropertyNames:arg1];
 }
 
 @end
@@ -130,20 +140,21 @@
 @implementation DebugHierarchyRequestExecutionContext_swizzled
 
 - (void)swizzled_addProperties:(NSArray *)properties toObject:(id)arg2 {
-//    if ([arg2 isKindOfClass:[UILabel class]]) {
-//        NSLog(@"properites: %@", properties);
-//        NSLog(@"%@", [properties.firstObject class]);
-//    }
-    if (properties.count == 1) {
-        NSMutableDictionary *dict = [properties.firstObject mutableCopy];
-        if ([dict[@"propertyName"] isEqualToString:@"dbgFormattedDisplayName"]) {
-            dict[@"propertyValue"] = @"XXXXXXXXXXXXXXXXX";
-        }
-        properties = @[ dict ];
-        
-        NSLog(@"%@", [NSThread callStackSymbols]);
+  //    if ([arg2 isKindOfClass:[UILabel class]]) {
+  //        NSLog(@"properites: %@", properties);
+  //        NSLog(@"%@", [properties.firstObject class]);
+  //    }
+  if (properties.count == 1) {
+    NSMutableDictionary *dict = [properties.firstObject mutableCopy];
+    if ([dict[@"propertyName"] isEqualToString:@"dbgFormattedDisplayName"]) {
+      dict[@"propertyValue"] = @"XXXXXXXXXXXXXXXXX";
+      NSLog(@"%@", [NSThread callStackSymbols]);
     }
-    [self swizzled_addProperties:properties toObject:arg2];
+    properties = @[ dict ];
+    
+    NSLog(@"%@", [NSThread callStackSymbols]);
+  }
+  [self swizzled_addProperties:properties toObject:arg2];
 }
 
 @end
@@ -155,22 +166,9 @@
 
 - (NSString *)swizzled_debugDescription
 {
-    NSString *result = [self swizzled_debugDescription];
-    NSLog(@"swizzled_debugDescription: %@", result);
-    return result;
-}
-
-@end
-
-@interface UILabel (DebuggingDescription)
-@end
-
-@implementation UILabel (DebuggingDescription)
-
-+ (id)debugHierarchyValueForPropertyWithName:(id)arg1 onObject:(id)arg2 outOptions:(id *)arg3 outError:(id *)arg4
-{
-    NSLog(@"debugHierarchyValueForPropertyWithName %@, %@", arg1, arg2);
-    return nil;
+  NSString *result = [self swizzled_debugDescription];
+  NSLog(@"swizzled_debugDescription: %@", result);
+  return result;
 }
 
 @end
@@ -178,37 +176,34 @@
 @implementation ViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    
-//    [SwizzleHelper swizzle:[UILabel_swizzled class]];
-//    [SwizzleHelper swizzle:[DebugHierarchyTargetHub_swizzled class]];
-//    [SwizzleHelper swizzle:[DebugHierarchyPropertyAction_swizzled class]];
-//    [SwizzleHelper swizzle:[DebugHierarchyRequestExecutionContext_swizzled class]];
-//    [SwizzleHelper swizzle:[CALayer_swizzled class]];
-    
-    UILabel *label = [[UILabel alloc] init];
-    label.text = @"xxxxxxxx";
-    [label _setDrawsDebugBaselines:YES];
-    
-    [self.view addSubview:(id)label];
-    
-    MyView *view = [[MyView alloc] init];
-    view.text = @"this is suppsed to be some text";
-    [self.view addSubview:view];
-    _label = view;
-    
-    NSLog(@"%@", view.text);
-    
-    [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
-        if ([view.bts count]) {
-            NSLog(@"%@", view.bts);
-            view.bts = [[NSMutableArray alloc] init];
-        }
-    }];
+  [super viewDidLoad];
+  
+  [UIView swizzleViewHierarchyDisplayName];
+  
+  UILabel *label = [[UILabel alloc] init];
+  label.text = @"xxxxxxxx";
+  
+  [self.view addSubview:(id)label];
+  
+  MyView *view = [[MyView alloc] init];
+  view.text = @"this is suppsed to be some text";
+  [self.view addSubview:view];
+  _label = view;
+  
+  self.aSwitch.viewHierarchyDisplayName = @"👋🌎";
+  
+  NSLog(@"%@", view.text);
+  
+  [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+    if ([view.bts count]) {
+      NSLog(@"%@", view.bts);
+      view.bts = [[NSMutableArray alloc] init];
+    }
+  }];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+  [super viewDidAppear:animated];
 }
 
 @end

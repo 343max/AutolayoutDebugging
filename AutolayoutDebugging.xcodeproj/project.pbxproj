@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5092A74C224592D8003B7CD9 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5092A74B224592D8003B7CD9 /* SceneKit.framework */; };
+		5092A75122459AA5003B7CD9 /* UIView+Debugging.m in Sources */ = {isa = PBXBuildFile; fileRef = 5092A75022459AA5003B7CD9 /* UIView+Debugging.m */; };
 		CF7942432243D62100ED64CB /* SwizzleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7942412243D62100ED64CB /* SwizzleHelper.m */; };
 		CF90198B2243C4BC0016912D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CF90198A2243C4BC0016912D /* AppDelegate.m */; };
 		CF90198E2243C4BC0016912D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF90198D2243C4BC0016912D /* ViewController.m */; };
@@ -36,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5092A74B224592D8003B7CD9 /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
+		5092A74F22459AA5003B7CD9 /* UIView+Debugging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Debugging.h"; sourceTree = "<group>"; };
+		5092A75022459AA5003B7CD9 /* UIView+Debugging.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Debugging.m"; sourceTree = "<group>"; };
 		CF7942412243D62100ED64CB /* SwizzleHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwizzleHelper.m; sourceTree = "<group>"; };
 		CF7942422243D62100ED64CB /* SwizzleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwizzleHelper.h; sourceTree = "<group>"; };
 		CF9019862243C4BC0016912D /* AutolayoutDebugging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutolayoutDebugging.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,7 +59,6 @@
 		CF9019A92243C4BD0016912D /* AutolayoutDebuggingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AutolayoutDebuggingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF9019AD2243C4BD0016912D /* AutolayoutDebuggingUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutolayoutDebuggingUITests.m; sourceTree = "<group>"; };
 		CF9019AF2243C4BD0016912D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CF9019BB2243C4CA0016912D /* UIView+Debugging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Debugging.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5092A74C224592D8003B7CD9 /* SceneKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +87,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5092A74A224592D8003B7CD9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5092A74B224592D8003B7CD9 /* SceneKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CF90197D2243C4BC0016912D = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +102,7 @@
 				CF9019A12243C4BD0016912D /* AutolayoutDebuggingTests */,
 				CF9019AC2243C4BD0016912D /* AutolayoutDebuggingUITests */,
 				CF9019872243C4BC0016912D /* Products */,
+				5092A74A224592D8003B7CD9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,7 +121,6 @@
 			children = (
 				CF9019892243C4BC0016912D /* AppDelegate.h */,
 				CF90198A2243C4BC0016912D /* AppDelegate.m */,
-				CF9019BB2243C4CA0016912D /* UIView+Debugging.h */,
 				CF90198C2243C4BC0016912D /* ViewController.h */,
 				CF90198D2243C4BC0016912D /* ViewController.m */,
 				CF90198F2243C4BC0016912D /* Main.storyboard */,
@@ -117,6 +130,8 @@
 				CF7942412243D62100ED64CB /* SwizzleHelper.m */,
 				CF9019972243C4BD0016912D /* Info.plist */,
 				CF9019982243C4BD0016912D /* main.m */,
+				5092A74F22459AA5003B7CD9 /* UIView+Debugging.h */,
+				5092A75022459AA5003B7CD9 /* UIView+Debugging.m */,
 			);
 			path = AutolayoutDebugging;
 			sourceTree = "<group>";
@@ -273,6 +288,7 @@
 				CF9019992243C4BD0016912D /* main.m in Sources */,
 				CF7942432243D62100ED64CB /* SwizzleHelper.m in Sources */,
 				CF90198B2243C4BC0016912D /* AppDelegate.m in Sources */,
+				5092A75122459AA5003B7CD9 /* UIView+Debugging.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

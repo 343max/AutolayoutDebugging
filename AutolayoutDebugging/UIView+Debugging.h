@@ -1,26 +1,15 @@
-//
-//  UIView+Debugging.h
-//  gdsfhjfjdfsagh
-//
-//  Created by von Webel, Max Florian on 21.03.19.
-//  Copyright © 2019 von Webel, Max Florian. All rights reserved.
-//
+// Copyright Max von Webel. All Rights Reserved.
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UIView (Debugging)
 
-- (void)_setLayoutDebuggingIdentifier:(NSString *)identifier;
-- (NSString *)_layoutDebuggingTitle;
-- (NSString *)_focusDebugOverlayParentView;
++ (void)swizzleViewHierarchyDisplayName;
 
-- (NSString *)_autolayoutTrace;
+@property (strong, nonatomic) NSString *viewHierarchyDisplayName;
 
 @end
 
-
-@interface UILabel (Debugging)
-
-- (void)_setDrawsDebugBaselines:(BOOL)enabled;
-
-@end
+NS_ASSUME_NONNULL_END
